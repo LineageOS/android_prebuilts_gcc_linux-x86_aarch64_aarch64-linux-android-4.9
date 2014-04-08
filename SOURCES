@@ -1,0 +1,51 @@
+Using built-in specs.
+COLLECT_GCC=/tmp/android-aarch64-4.9-2014-04-08/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64//bin/aarch64-linux-android-gcc
+COLLECT_LTO_WRAPPER=/tmp/android-aarch64-4.9-2014-04-08/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/../libexec/gcc/aarch64-linux-android/4.9/lto-wrapper
+Target: aarch64-linux-android
+Configured with: /tmp/AOSP-toolchain/build/../gcc/gcc-4.9/configure --prefix=/tmp/toolchain-build-aarch64-linux-4.9/prefix --target=aarch64-linux-android --host=x86_64-linux-gnu --build=x86_64-linux-gnu --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --with-gmp=/tmp/toolchain-build-aarch64-linux-4.9/temp-install --with-mpfr=/tmp/toolchain-build-aarch64-linux-4.9/temp-install --with-mpc=/tmp/toolchain-build-aarch64-linux-4.9/temp-install --with-cloog=/tmp/toolchain-build-aarch64-linux-4.9/temp-install --with-isl=/tmp/toolchain-build-aarch64-linux-4.9/temp-install --with-ppl=/tmp/toolchain-build-aarch64-linux-4.9/temp-install --disable-ppl-version-check --disable-cloog-version-check --disable-isl-version-check --enable-cloog-backend=isl --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --disable-libitm --enable-initfini-array --disable-nls --prefix=/tmp/toolchain-build-aarch64-linux-4.9/prefix --with-sysroot=/tmp/toolchain-build-aarch64-linux-4.9/prefix/sysroot --with-binutils-version=2.24 --with-mpfr-version=3.1.1 --with-mpc-version=1.0.1 --with-gmp-version=5.0.5 --with-gcc-version=4.9 --with-gdb-version=7.7 --with-gxx-include-dir=/tmp/toolchain-build-aarch64-linux-4.9/prefix/include/c++/4.9 --with-bugurl=http://source.android.com/source/report-bugs.html --disable-bootstrap --disable-libquadmath --enable-plugins --enable-libgomp --disable-libsanitizer --enable-gold --enable-graphite=yes --with-cloog-version=0.18.0 --with-isl-version=0.11.1 --enable-eh-frame-hdr-for-static --disable-gold --disable-libgomp --program-transform-name='s&^&aarch64-linux-android-&'
+Thread model: posix
+gcc version 4.9 20140324 (experimental) (GCC) 
+
+gcc:
+commit 551fff35cb782423f9641c4b3c2b0183f38c9bb3
+Merge: 8d0a1b4 6925150
+Author: Ben Cheng <bccheng@google.com>
+
+    Merge "[4.9] Simply use 4.9 as the base version."
+
+binutils:
+commit 09797ba54abf3683ea66eedddf6afbe7653f9cb9
+Author: Ben Cheng <bccheng@google.com>
+
+    Initial checkin of binutils 2.24.
+
+gdb:
+commit b80f01cebf5b2eceedf6aadaeb39aa6a4d0b584c
+Author: Ben Cheng <bccheng@google.com>
+
+    [7.7] patches to compile gdbserver with uapi headers.
+
+gmp:
+commit e6b9669dafc6a5f83c80b4b4176359b78bccdc90
+Author: David 'Digit' Turner <digit@google.com>
+
+    Add gmp-5.0.5.tar.bz2
+
+mpfr:
+commit bfcf1bfa38469208aaad8873cd4c68781061d90f
+Author: Andrew Hsieh <andrewhsieh@google.com>
+
+    add mpfr-3.1.1.tar.bz2
+
+build:
+commit ccf7c394c02f03c0674bd86844e807cbc725eda0
+Author: Pavel Chupin <pavel.v.chupin@intel.com>
+
+    Propagate -j in make calls for better parallelization
+
+expat:
+commit 40172a0ae9d40a068f1e1a48ffcf6a1ccf765ed5
+Author: Jing Yu <jingyu@google.com>
+
+    expat package for building gdb-7.3
+
