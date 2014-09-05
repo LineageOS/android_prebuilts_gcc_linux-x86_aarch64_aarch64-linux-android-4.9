@@ -98,7 +98,6 @@ SECTIONS
      could instead move the label definition inside the section, but
      the linker would then create the section even if it turns out to
      be empty, which isn't pretty.  */
-  . = ALIGN(32 / 8);
   .preinit_array   0 :
   {
     KEEP (*(.preinit_array))
