@@ -1,29 +1,28 @@
 Using built-in specs.
-COLLECT_GCC=bin/aarch64-linux-android-gcc
-COLLECT_LTO_WRAPPER=/mnt/ssd/xur/android_AOSP/v10/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/../libexec/gcc/aarch64-linux-android/4.9.x-google/lto-wrapper
+COLLECT_GCC=./aarch64-linux-android-gcc
+COLLECT_LTO_WRAPPER=/mnt/ssd/android_build/prebuilt/toolchains/aarch64-linux-android-4.9/prebuilt/aarch64-linux-android-4.9/bin/../libexec/gcc/aarch64-linux-android/4.9.x-google/lto-wrapper
 Target: aarch64-linux-android
-Configured with: /tmp/AOSP-toolchain/build/../gcc/gcc-4.9/configure --prefix=/tmp/ndk-xur/build/toolchain/prefix --target=aarch64-linux-android --host=x86_64-linux-gnu --build=x86_64-linux-gnu --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --with-gmp=/tmp/ndk-xur/build/toolchain/temp-install --with-mpfr=/tmp/ndk-xur/build/toolchain/temp-install --with-mpc=/tmp/ndk-xur/build/toolchain/temp-install --with-cloog=/tmp/ndk-xur/build/toolchain/temp-install --with-isl=/tmp/ndk-xur/build/toolchain/temp-install --with-ppl=/tmp/ndk-xur/build/toolchain/temp-install --disable-ppl-version-check --disable-cloog-version-check --disable-isl-version-check --enable-cloog-backend=isl --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --disable-libitm --enable-initfini-array --disable-nls --prefix=/tmp/ndk-xur/build/toolchain/prefix --with-sysroot=/tmp/ndk-xur/build/toolchain/prefix/sysroot --with-binutils-version=2.24 --with-mpfr-version=3.1.1 --with-mpc-version=1.0.1 --with-gmp-version=5.0.5 --with-gcc-version=4.9 --with-gdb-version=7.7 --with-gxx-include-dir=/tmp/ndk-xur/build/toolchain/prefix/include/c++/4.9 --with-bugurl=http://source.android.com/source/report-bugs.html --disable-bootstrap --disable-libquadmath --enable-plugins --enable-libgomp --disable-libsanitizer --enable-gold --enable-graphite=yes --with-cloog-version=0.18.0 --with-isl-version=0.11.1 --enable-eh-frame-hdr-for-static --enable-fix-cortex-a53-835769 --disable-gold --program-transform-name='s&^&aarch64-linux-android-&'
+Configured with: /tmp/AOSP-toolchain/build/../gcc/gcc-4.9/configure --prefix=/tmp/ndk-xur/build/toolchain/prefix --target=aarch64-linux-android --host=x86_64-linux-gnu --build=x86_64-linux-gnu --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --with-gmp=/tmp/ndk-xur/build/toolchain/temp-install --with-mpfr=/tmp/ndk-xur/build/toolchain/temp-install --with-mpc=/tmp/ndk-xur/build/toolchain/temp-install --with-cloog=/tmp/ndk-xur/build/toolchain/temp-install --with-isl=/tmp/ndk-xur/build/toolchain/temp-install --with-ppl=/tmp/ndk-xur/build/toolchain/temp-install --disable-ppl-version-check --disable-cloog-version-check --disable-isl-version-check --enable-cloog-backend=isl --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --disable-libitm --enable-initfini-array --disable-nls --prefix=/tmp/ndk-xur/build/toolchain/prefix --with-sysroot=/tmp/ndk-xur/build/toolchain/prefix/sysroot --with-binutils-version=2.25 --with-mpfr-version=3.1.1 --with-mpc-version=1.0.1 --with-gmp-version=5.0.5 --with-gcc-version=4.9 --with-gdb-version=7.7 --with-gxx-include-dir=/tmp/ndk-xur/build/toolchain/prefix/include/c++/4.9 --with-bugurl=http://source.android.com/source/report-bugs.html --disable-bootstrap --enable-plugins --enable-libgomp --enable-gnu-indirect-function --disable-libsanitizer --enable-gold --enable-ld=default --enable-threads --enable-graphite=yes --with-cloog-version=0.18.0 --with-isl-version=0.11.1 --enable-eh-frame-hdr-for-static --enable-fix-cortex-a53-835769 --program-transform-name='s&^&aarch64-linux-android-&' --enable-gold
 Thread model: posix
-gcc version 4.9.x-google 20140827 (prerelease) (GCC) 
+gcc version 4.9.x-google 20140827 (prerelease) (GCC)
 
 gcc:
-commit 407a2d5c2c63bdc0c842ffcd57a139ef8a4f33e2
-Author: Rong Xu <xur@google.com>
-
-    [4.9] Disable array bound warning in ARM
-
-binutils:
-commit 5387e7a81fcd3e033a29eccece64e02f96e7f960
-Author: Tejas Belagod <tejas.belagod@arm.com>
-
-    Fixed Cortex-A53 Erratum 835769 -- LD segfaults with unordered maps.
-
-gdb:
-commit 4d4fc852868e03aa125d19ec0ad7e7fbc157c81c
-Merge: 500f3b2 668248d
+commit 0dd93631a0aa1b5c2f807270305225bc2786393b
 Author: Andrew Hsieh <andrewhsieh@google.com>
 
-    Merge "Add MIPS R6 support."
+    backport fix for ICE: in add_stores, at var-tracking.c:6000
+
+binutils:
+commit a9dedea652b5198bebf99d646ffa6b698f1980e5
+Author: Marcus Shawcroft <marcus.shawcroft@arm.com>
+
+    [AArch64] Workaround for cortex-a53 erratum 843419
+
+gdb:
+commit d54e4b7af5c45d4bcde6f65e5dc44c821739740f
+Author: Andrew Hsieh <andrewhsieh@google.com>
+
+    Misc gdb-7.7 fixes for Android
 
 gmp:
 commit e6b9669dafc6a5f83c80b4b4176359b78bccdc90
@@ -38,10 +37,10 @@ Author: Andrew Hsieh <andrewhsieh@google.com>
     add mpfr-3.1.1.tar.bz2
 
 build:
-commit 75542e77b565c2af968e48c1b12b32f343d913ae
+commit f8db3f1d0824da5315df3415814ba76108157796
 Author: Andrew Hsieh <andrewhsieh@google.com>
 
-    Fix binutils-2.24 detection
+    Static link ld.gold by mingw to avoid dependencies on libwinpthread-1.dll
 
 expat:
 commit 40172a0ae9d40a068f1e1a48ffcf6a1ccf765ed5
