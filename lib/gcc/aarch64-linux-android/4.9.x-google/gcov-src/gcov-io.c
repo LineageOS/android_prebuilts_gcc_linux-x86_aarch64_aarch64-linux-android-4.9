@@ -41,7 +41,7 @@ static void gcov_allocate (unsigned);
 
 GCOV_LINKAGE struct gcov_var
 {
-  _GCOV_FILE *file;
+  FILE *file;
   gcov_position_t start;	/* Position of first byte of block */
   unsigned offset;		/* Read/write position within the block.  */
   unsigned length;		/* Read limit in the block.  */
@@ -94,7 +94,7 @@ gcov_rewrite (void)
   gcov_var.mode = -1; 
   gcov_var.start = 0;
   gcov_var.offset = 0;
-  _GCOV_fseek (gcov_var.file, 0L, SEEK_SET);
+  fseek (gcov_var.file, 0L, SEEK_SET);
 }
 #endif
 
@@ -120,7 +120,6 @@ static inline gcov_unsigned_t from_file (gcov_unsigned_t value)
    Return zero on failure, >0 on opening an existing file and <0 on
    creating a new one.  */
 
-#ifndef __KERNEL__
 GCOV_LINKAGE int
 #if IN_LIBGCOV
 gcov_open (const char *name)
@@ -191,7 +190,7 @@ gcov_open (const char *name, int mode)
 
       if (fstat (fd, &st) < 0)
 	{
-	  _GCOV_fclose (gcov_var.file);
+	  fclose (gcov_var.file);
 	  gcov_var.file = 0;
 	  return 0;
 	}
@@ -204,13 +203,13 @@ gcov_open (const char *name, int mode)
     gcov_var.mode = mode * 2 + 1;
 #else
   if (mode >= 0)
-    gcov_var.file = _GCOV_fopen (name, (mode > 0) ? "rb" : "r+b");
+    gcov_var.file = fopen (name, (mode > 0) ? "rb" : "r+b");
 
   if (gcov_var.file)
     gcov_var.mode = 1;
   else if (mode <= 0)
     {
-      gcov_var.file = _GCOV_fopen (name, "w+b");
+      gcov_var.file = fopen (name, "w+b");
       if (gcov_var.file)
 	gcov_var.mode = mode * 2 + 1;
     }
@@ -222,24 +221,6 @@ gcov_open (const char *name, int mode)
 
   return 1;
 }
-#else /* __KERNEL__ */
-
-extern _GCOV_FILE *gcov_current_file;
-
-GCOV_LINKAGE int
-gcov_open (const char *name)
-{
-  gcov_var.start = 0; 
-  gcov_var.offset = gcov_var.length = 0; 
-  gcov_var.overread = -1u; 
-  gcov_var.error = 0; 
-  gcov_var.file = gcov_current_file;
-  gcov_var.mode = 1; 
-
-  return 1;
-}
-#endif /* __KERNEL__ */
-
 
 /* Close the current gcov file. Flushes data to disk. Returns nonzero
    on failure or error flag set.  */
@@ -253,7 +234,7 @@ gcov_close (void)
       if (gcov_var.offset && gcov_var.mode < 0)
 	gcov_write_block (gcov_var.offset);
 #endif
-      _GCOV_fclose (gcov_var.file);
+      fclose (gcov_var.file);
       gcov_var.file = 0;
       gcov_var.length = 0;
     }
@@ -309,7 +290,7 @@ gcov_allocate (unsigned length)
 static void
 gcov_write_block (unsigned size)
 {
-  if (_GCOV_fwrite (gcov_var.buffer, size << 2, 1, gcov_var.file) != 1)
+  if (fwrite (gcov_var.buffer, size << 2, 1, gcov_var.file) != 1)
     gcov_var.error = 1;
   gcov_var.start += size;
   gcov_var.offset -= size;
@@ -353,47 +334,6 @@ gcov_write_unsigned (gcov_unsigned_t value)
   gcov_unsigned_t *buffer = gcov_write_words (1);
 
   buffer[0] = value;
-}
-
-/* Compute the total length in words required to write NUM_STRINGS
-   in STRING_ARRAY as unsigned.  */
-
-GCOV_LINKAGE gcov_unsigned_t
-gcov_compute_string_array_len (char **string_array,
-                               gcov_unsigned_t num_strings)
-{
-  gcov_unsigned_t len = 0, i;
-  for (i = 0; i < num_strings; i++)
-    {
-      gcov_unsigned_t string_len
-          = (strlen (string_array[i]) + sizeof (gcov_unsigned_t))
-          / sizeof (gcov_unsigned_t);
-      len += string_len;
-      len += 1; /* Each string is lead by a length.  */
-    }
-  return len;
-}
-
-/* Write NUM_STRINGS in STRING_ARRAY as unsigned.  */
-
-GCOV_LINKAGE void
-gcov_write_string_array (char **string_array, gcov_unsigned_t num_strings)
-{
-  gcov_unsigned_t i, j;
-  for (j = 0; j < num_strings; j++)
-    {
-      gcov_unsigned_t *aligned_string;
-      gcov_unsigned_t string_len =
-	(strlen (string_array[j]) + sizeof (gcov_unsigned_t)) /
-	sizeof (gcov_unsigned_t);
-      aligned_string = (gcov_unsigned_t *)
-	alloca ((string_len + 1) * sizeof (gcov_unsigned_t));
-      memset (aligned_string, 0, (string_len + 1) * sizeof (gcov_unsigned_t));
-      aligned_string[0] = string_len;
-      strcpy ((char*) (aligned_string + 1), string_array[j]);
-      for (i = 0; i < (string_len + 1); i++)
-        gcov_write_unsigned (aligned_string[i]);
-    }
 }
 
 /* Write counter VALUE to coverage file.  Sets error flag
@@ -577,7 +517,7 @@ gcov_read_words (unsigned words)
 	gcov_allocate (gcov_var.length + words);
       excess = gcov_var.alloc - gcov_var.length;
 #endif
-      excess = _GCOV_fread (gcov_var.buffer + gcov_var.length,
+      excess = fread (gcov_var.buffer + gcov_var.length,
 		      1, excess << 2, gcov_var.file) >> 2;
       gcov_var.length += excess;
       if (gcov_var.length < words)
@@ -646,20 +586,6 @@ gcov_read_string (void)
 }
 #endif
 
-#ifdef __KERNEL__
-static int
-k_popcountll (long long x)
-{
-  int c = 0;
-  while (x)
-    {
-      c++;
-      x &= (x-1);
-    }
-  return c;
-}
-#endif
-
 GCOV_LINKAGE void
 gcov_read_summary (struct gcov_summary *summary)
 {
@@ -686,11 +612,7 @@ gcov_read_summary (struct gcov_summary *summary)
              hwint.h (where popcount_hwi is declared). However, libgcov.a
              is built by the bootstrapped compiler and therefore the builtins
              are always available.  */
-#ifndef __KERNEL__
           h_cnt += __builtin_popcount (histo_bitvector[bv_ix]);
-#else
-          h_cnt += k_popcountll (histo_bitvector[bv_ix]);
-#endif
 #else
           h_cnt += popcount_hwi (histo_bitvector[bv_ix]);
 #endif
@@ -728,78 +650,6 @@ gcov_read_summary (struct gcov_summary *summary)
     }
 }
 
-/* Read LENGTH words (unsigned type) from a zero profile fixup record with the
-   number of function flags saved in NUM_FNS.  Returns the int flag array, which
-   should be deallocated by caller, or NULL on error.  */
-
-GCOV_LINKAGE int *
-gcov_read_comdat_zero_fixup (gcov_unsigned_t length,
-                             gcov_unsigned_t *num_fns)
-{
-#ifndef __KERNEL__
-  unsigned ix, f_ix;
-  gcov_unsigned_t num = gcov_read_unsigned ();
-  /* The length consists of 1 word to hold the number of functions,
-     plus enough 32-bit words to hold 1 bit/function.  */
-  gcc_assert ((num + 31) / 32 + 1 == length);
-  int *zero_fixup_flags = (int *) xcalloc (num, sizeof (int));
-  for (ix = 0; ix < length - 1; ix++)
-    {
-      gcov_unsigned_t bitvector = gcov_read_unsigned ();
-      f_ix = ix * 32;
-      while (bitvector)
-        {
-          if (bitvector & 0x1)
-            zero_fixup_flags[f_ix] = 1;
-          f_ix++;
-          bitvector >>= 1;
-        }
-    }
-  *num_fns = num;
-  return zero_fixup_flags;
-#else
-  return NULL;
-#endif
-}
-
-/* Read NUM_STRINGS strings (as an unsigned array) in STRING_ARRAY, and return
-   the number of words read.  */
-
-GCOV_LINKAGE gcov_unsigned_t
-gcov_read_string_array (char **string_array, gcov_unsigned_t num_strings)
-{
-  gcov_unsigned_t i, j, len = 0;
-
-  for (j = 0; j < num_strings; j++)
-   {
-     gcov_unsigned_t string_len = gcov_read_unsigned ();
-     string_array[j] =
-       (char *) xmalloc (string_len * sizeof (gcov_unsigned_t));
-     for (i = 0; i < string_len; i++)
-       ((gcov_unsigned_t *) string_array[j])[i] = gcov_read_unsigned ();
-     len += (string_len + 1);
-   }
-  return len;
-}
-
-/* Read LENGTH words (unsigned type) from a build info record with the number
-   of strings read saved in NUM_STRINGS.  Returns the string array, which
-   should be deallocated by caller, or NULL on error.  */
-
-GCOV_LINKAGE char **
-gcov_read_build_info (gcov_unsigned_t length, gcov_unsigned_t *num_strings)
-{
-  gcov_unsigned_t num = gcov_read_unsigned ();
-  char **build_info_strings = (char **)
-      xmalloc (sizeof (char *) * num);
-  gcov_unsigned_t len = gcov_read_string_array (build_info_strings,
-                                                num);
-  if (len != length - 1)
-    return NULL;
-  *num_strings = num;
-  return build_info_strings;
-}
-
 #if (!IN_LIBGCOV && IN_GCOV != 1) || defined (IN_GCOV_TOOL)
 /* Read LEN words (unsigned type) and construct MOD_INFO.  */
 
@@ -807,7 +657,7 @@ GCOV_LINKAGE void
 gcov_read_module_info (struct gcov_module_info *mod_info,
                        gcov_unsigned_t len)
 {
-  gcov_unsigned_t src_filename_len, filename_len, i, num_strings;
+  gcov_unsigned_t src_filename_len, filename_len, i, j, num_strings;
   mod_info->ident = gcov_read_unsigned ();
   mod_info->is_primary = gcov_read_unsigned ();
   mod_info->flags = gcov_read_unsigned ();
@@ -839,7 +689,16 @@ gcov_read_module_info (struct gcov_module_info *mod_info,
     + mod_info->num_system_paths
     + mod_info->num_cpp_defines + mod_info->num_cpp_includes
     + mod_info->num_cl_args;
-  len -= gcov_read_string_array (mod_info->string_array, num_strings);
+  for (j = 0; j < num_strings; j++)
+   {
+     gcov_unsigned_t string_len = gcov_read_unsigned ();
+     mod_info->string_array[j] =
+       (char *) xmalloc (string_len * sizeof (gcov_unsigned_t));
+     for (i = 0; i < string_len; i++)
+       ((gcov_unsigned_t *) mod_info->string_array[j])[i] =
+	 gcov_read_unsigned ();
+     len -= (string_len + 1);
+   }
   gcc_assert (!len);
 }
 #endif
@@ -860,8 +719,8 @@ gcov_sync (gcov_position_t base, gcov_unsigned_t length)
   else
     {
       gcov_var.offset = gcov_var.length = 0;
-      _GCOV_fseek (gcov_var.file, base << 2, SEEK_SET);
-      gcov_var.start = _GCOV_ftell (gcov_var.file) >> 2;
+      fseek (gcov_var.file, base << 2, SEEK_SET);
+      gcov_var.start = ftell (gcov_var.file) >> 2;
     }
 }
 #endif
@@ -875,8 +734,8 @@ gcov_seek (gcov_position_t base)
   gcc_assert (gcov_var.mode < 0);
   if (gcov_var.offset)
     gcov_write_block (gcov_var.offset);
-  _GCOV_fseek (gcov_var.file, base << 2, SEEK_SET);
-  gcov_var.start = _GCOV_ftell (gcov_var.file) >> 2;
+  fseek (gcov_var.file, base << 2, SEEK_SET);
+  gcov_var.start = ftell (gcov_var.file) >> 2;
 }
 
 /* Truncate the gcov file at the current position.  */
@@ -884,19 +743,15 @@ gcov_seek (gcov_position_t base)
 GCOV_LINKAGE void
 gcov_truncate (void)
 {
-#ifdef __KERNEL__
-  gcc_assert (0);
-#else
   long offs;
   int filenum;
   gcc_assert (gcov_var.mode < 0);
   if (gcov_var.offset)
     gcov_write_block (gcov_var.offset);
-  offs = _GCOV_ftell (gcov_var.file);
+  offs = ftell (gcov_var.file);
   filenum = fileno (gcov_var.file);
-  if (offs == -1 || filenum == -1 || _GCOV_ftruncate (filenum, offs))
+  if (offs == -1 || filenum == -1 || ftruncate (filenum, offs))
     gcov_var.error = 1;
-#endif /* __KERNEL__ */
 }
 #endif
 
