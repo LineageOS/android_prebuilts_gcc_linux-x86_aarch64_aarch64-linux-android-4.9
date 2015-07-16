@@ -1,46 +1,53 @@
 Using built-in specs.
 COLLECT_GCC=./aarch64-linux-android-gcc
-COLLECT_LTO_WRAPPER=/mnt/ssd/android_build/prebuilt/toolchains/aarch64-linux-android-4.9/prebuilt/aarch64-linux-android-4.9/bin/../libexec/gcc/aarch64-linux-android/4.9.x-google/lto-wrapper
+COLLECT_LTO_WRAPPER=/usr/local/google/home/yiran/work/AOSP/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/../libexec/gcc/aarch64-linux-android/4.9.x-google/lto-wrapper
 Target: aarch64-linux-android
-Configured with: /tmp/AOSP-toolchain/build/../gcc/gcc-4.9/configure --prefix=/tmp/ndk-xur/build/toolchain/prefix --target=aarch64-linux-android --host=x86_64-linux-gnu --build=x86_64-linux-gnu --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --with-gmp=/tmp/ndk-xur/build/toolchain/temp-install --with-mpfr=/tmp/ndk-xur/build/toolchain/temp-install --with-mpc=/tmp/ndk-xur/build/toolchain/temp-install --with-cloog=/tmp/ndk-xur/build/toolchain/temp-install --with-isl=/tmp/ndk-xur/build/toolchain/temp-install --with-ppl=/tmp/ndk-xur/build/toolchain/temp-install --disable-ppl-version-check --disable-cloog-version-check --disable-isl-version-check --enable-cloog-backend=isl --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --disable-libitm --enable-initfini-array --disable-nls --prefix=/tmp/ndk-xur/build/toolchain/prefix --with-sysroot=/tmp/ndk-xur/build/toolchain/prefix/sysroot --with-binutils-version=2.25 --with-mpfr-version=3.1.1 --with-mpc-version=1.0.1 --with-gmp-version=5.0.5 --with-gcc-version=4.9 --with-gdb-version=7.7 --with-gxx-include-dir=/tmp/ndk-xur/build/toolchain/prefix/include/c++/4.9 --with-bugurl=http://source.android.com/source/report-bugs.html --disable-bootstrap --enable-plugins --enable-libgomp --enable-gnu-indirect-function --disable-libsanitizer --enable-gold --enable-ld=default --enable-threads --enable-graphite=yes --with-cloog-version=0.18.0 --with-isl-version=0.11.1 --enable-eh-frame-hdr-for-static --enable-fix-cortex-a53-835769 --program-transform-name='s&^&aarch64-linux-android-&' --enable-gold
+Configured with: /tmp/AOSP-toolchain/build/../gcc/gcc-4.9/configure --prefix=/tmp/ndk-yiran/build/toolchain/prefix --target=aarch64-linux-android --host=x86_64-linux-gnu --build=x86_64-linux-gnu --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --with-gmp=/tmp/ndk-yiran/build/toolchain/temp-install --with-mpfr=/tmp/ndk-yiran/build/toolchain/temp-install --with-mpc=/tmp/ndk-yiran/build/toolchain/temp-install --with-cloog=/tmp/ndk-yiran/build/toolchain/temp-install --with-isl=/tmp/ndk-yiran/build/toolchain/temp-install --with-ppl=/tmp/ndk-yiran/build/toolchain/temp-install --disable-ppl-version-check --disable-cloog-version-check --disable-isl-version-check --enable-cloog-backend=isl --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --disable-libitm --enable-initfini-array --disable-nls --prefix=/tmp/ndk-yiran/build/toolchain/prefix --with-sysroot=/tmp/ndk-yiran/build/toolchain/prefix/sysroot --with-binutils-version=2.25 --with-mpfr-version=3.1.1 --with-mpc-version=1.0.1 --with-gmp-version=5.0.5 --with-gcc-version=4.9 --with-gdb-version=7.9.1 --with-gxx-include-dir=/tmp/ndk-yiran/build/toolchain/prefix/include/c++/4.9 --with-bugurl=http://source.android.com/source/report-bugs.html --enable-languages=c,c++ --disable-bootstrap --enable-plugins --enable-libgomp --enable-gnu-indirect-function --disable-libsanitizer --enable-gold --enable-ld=default --enable-threads --enable-graphite=yes --with-cloog-version=0.18.0 --with-isl-version=0.11.1 --enable-eh-frame-hdr-for-static --enable-fix-cortex-a53-835769 --program-transform-name='s&^&aarch64-linux-android-&' --enable-gold
 Thread model: posix
-gcc version 4.9.x-google 20140827 (prerelease) (GCC)
+gcc version 4.9.x-google 20150123 (prerelease) (GCC) 
 
 gcc:
-commit 0dd93631a0aa1b5c2f807270305225bc2786393b
-Author: Andrew Hsieh <andrewhsieh@google.com>
+commit 5ae0308a147ec3f6502fd321860524e634a647a6
+Author: Yiran Wang <yiran@google.com>
+Date:   Wed Jul 8 09:44:03 2015 -0700
 
-    backport fix for ICE: in add_stores, at var-tracking.c:6000
+    cherry-pick gcc r217091.
 
 binutils:
-commit a9dedea652b5198bebf99d646ffa6b698f1980e5
-Author: Marcus Shawcroft <marcus.shawcroft@arm.com>
+commit 5b0b7aca66a30692402df9a9909ebbad7acac259
+Author: Cary Coutant <ccoutant@google.com>
+Date:   Mon Mar 2 10:10:52 2015 -0800
 
-    [AArch64] Workaround for cortex-a53 erratum 843419
+    Fix an internal error in do_print_to_mapfile on Arm.
 
 gdb:
-commit d54e4b7af5c45d4bcde6f65e5dc44c821739740f
-Author: Andrew Hsieh <andrewhsieh@google.com>
+commit 46a114a3609f0626208607946e58135e48e41c55
+Merge: ec1883d e93ebb3
+Author: Elliott Hughes <enh@google.com>
+Date:   Thu Jul 9 01:34:38 2015 +0000
 
-    Misc gdb-7.7 fixes for Android
+    Merge "Add support for DT_MIPS_RLD_MAP2 tag to gdb 7.9.1"
 
 gmp:
-commit e6b9669dafc6a5f83c80b4b4176359b78bccdc90
-Author: David 'Digit' Turner <digit@google.com>
+commit b2acd5dbf47868ac5b5bc844e16d2cadcbd4c810
+Author: Dan Albert <danalbert@google.com>
+Date:   Wed Jun 17 22:16:40 2015 -0700
 
-    Add gmp-5.0.5.tar.bz2
+    Remove old versions of gmp.
 
 mpfr:
-commit bfcf1bfa38469208aaad8873cd4c68781061d90f
-Author: Andrew Hsieh <andrewhsieh@google.com>
+commit de979fc377db766591e7feaf052f0de59be46e76
+Author: Dan Albert <danalbert@google.com>
+Date:   Wed Jun 17 22:08:27 2015 -0700
 
-    add mpfr-3.1.1.tar.bz2
+    Remove old versions of mpfr.
 
 build:
-commit f8db3f1d0824da5315df3415814ba76108157796
-Author: Andrew Hsieh <andrewhsieh@google.com>
+commit 79b5701f1e2f0dee68958c7c4206cdf9c44f1261
+Author: Elliott Hughes <enh@google.com>
+Date:   Fri Jun 19 23:57:24 2015 +0000
 
-    Static link ld.gold by mingw to avoid dependencies on libwinpthread-1.dll
+    Revert "Remove references to expat from toolchain/build/configure."
 
 expat:
 commit 40172a0ae9d40a068f1e1a48ffcf6a1ccf765ed5

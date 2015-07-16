@@ -2,7 +2,7 @@
 
     It has been auto-edited by fixincludes from:
 
-	"/tmp/ndk-xur/build/toolchain/prefix/sysroot/usr/include/linux/a.out.h"
+	"/tmp/ndk-yiran/build/toolchain/prefix/sysroot/usr/include/linux/a.out.h"
 
     This had to be done to correct non-standard usages in the
     original, manufacturer supplied header file.  */
