@@ -187,6 +187,7 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 # define _GCOV_fwrite    fwrite
 # define _GCOV_fread     fread
 # define _GCOV_fileno    fileno
+# define _GCOV_fopen     fopen
 #endif
 
 #ifndef IN_LIBGCOV

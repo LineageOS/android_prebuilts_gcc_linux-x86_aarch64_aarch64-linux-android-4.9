@@ -1,32 +1,85 @@
 Using built-in specs.
-COLLECT_GCC=./aarch64-linux-android-gcc
-COLLECT_LTO_WRAPPER=/usr/local/google/home/yiran/work/AOSP/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/../libexec/gcc/aarch64-linux-android/4.9.x-google/lto-wrapper
+COLLECT_GCC=bin/aarch64-linux-android-gcc
+COLLECT_LTO_WRAPPER=/ssd/aosp_flounder-userdebug-update_gcc/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/../libexec/gcc/aarch64-linux-android/4.9.x-google/lto-wrapper
 Target: aarch64-linux-android
-Configured with: /tmp/AOSP-toolchain/build/../gcc/gcc-4.9/configure --prefix=/tmp/ndk-yiran/build/toolchain/prefix --target=aarch64-linux-android --host=x86_64-linux-gnu --build=x86_64-linux-gnu --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --with-gmp=/tmp/ndk-yiran/build/toolchain/temp-install --with-mpfr=/tmp/ndk-yiran/build/toolchain/temp-install --with-mpc=/tmp/ndk-yiran/build/toolchain/temp-install --with-cloog=/tmp/ndk-yiran/build/toolchain/temp-install --with-isl=/tmp/ndk-yiran/build/toolchain/temp-install --with-ppl=/tmp/ndk-yiran/build/toolchain/temp-install --disable-ppl-version-check --disable-cloog-version-check --disable-isl-version-check --enable-cloog-backend=isl --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --disable-libitm --enable-initfini-array --disable-nls --prefix=/tmp/ndk-yiran/build/toolchain/prefix --with-sysroot=/tmp/ndk-yiran/build/toolchain/prefix/sysroot --with-binutils-version=2.25 --with-mpfr-version=3.1.1 --with-mpc-version=1.0.1 --with-gmp-version=5.0.5 --with-gcc-version=4.9 --with-gdb-version=7.9.1 --with-gxx-include-dir=/tmp/ndk-yiran/build/toolchain/prefix/include/c++/4.9 --with-bugurl=http://source.android.com/source/report-bugs.html --enable-languages=c,c++ --disable-bootstrap --enable-plugins --enable-libgomp --enable-gnu-indirect-function --disable-libsanitizer --enable-gold --enable-ld=default --enable-threads --enable-graphite=yes --with-cloog-version=0.18.0 --with-isl-version=0.11.1 --enable-eh-frame-hdr-for-static --enable-fix-cortex-a53-835769 --program-transform-name='s&^&aarch64-linux-android-&' --enable-gold
+Configured with: /usr/local/google/buildbot/repo_clients/https___android.googlesource.com_a_platform_manifest.git/gcc/toolchain/build/../gcc/gcc-4.9/configure --prefix=/buildbot/tmp/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt --target=aarch64-linux-android --host=x86_64-linux-gnu --build=x86_64-linux-gnu --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --with-gmp=/buildbot/tmp/build/toolchain/temp-install --with-mpfr=/buildbot/tmp/build/toolchain/temp-install --with-mpc=/buildbot/tmp/build/toolchain/temp-install --with-cloog=/buildbot/tmp/build/toolchain/temp-install --with-isl=/buildbot/tmp/build/toolchain/temp-install --with-ppl=/buildbot/tmp/build/toolchain/temp-install --disable-ppl-version-check --disable-cloog-version-check --disable-isl-version-check --enable-cloog-backend=isl --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --disable-libitm --enable-initfini-array --disable-nls --prefix=/buildbot/tmp/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt --with-sysroot=/buildbot/tmp/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt/sysroot --with-binutils-version=2.25 --with-mpfr-version=3.1.1 --with-mpc-version=1.0.1 --with-gmp-version=5.0.5 --with-gcc-version=4.9 --with-gdb-version=none --with-gxx-include-dir=/buildbot/tmp/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt/include/c++/4.9 --with-bugurl=http://source.android.com/source/report-bugs.html --enable-languages=c,c++ --disable-bootstrap --enable-plugins --enable-libgomp --enable-gnu-indirect-function --disable-libsanitizer --enable-gold --enable-ld=default --enable-threads --enable-eh-frame-hdr-for-static --enable-fix-cortex-a53-835769 --enable-graphite=yes --with-isl-version=0.11.1 --with-cloog-version=0.18.0 --program-transform-name='s&^&aarch64-linux-android-&' --enable-gold
 Thread model: posix
-gcc version 4.9.x-google 20150123 (prerelease) (GCC) 
+gcc version 4.9.x-google 20150123 (prerelease) (GCC)
 
 gcc:
-commit 5ae0308a147ec3f6502fd321860524e634a647a6
-Author: Yiran Wang <yiran@google.com>
-Date:   Wed Jul 8 09:44:03 2015 -0700
+commit 5aff2e0142aca13849b4e51de503e71d5010efa6
+Author: Than McIntosh <thanm@google.com>
+Date:   Fri Oct 9 12:03:57 2015 -0400
 
-    cherry-pick gcc r217091.
+    Fix for b/23822150 (arm64 bad code for copysignl)
+
+    This bug was inherited from the google/gcc-4_9 branch; a
+    change was "temporarily" patched out in r216495, then never
+    restored.
+
+    Bug: 23822150
+
+    Change-Id: Ibfc9f65e108e9c9b3dca263920bdae3cc6f75080
 
 binutils:
-commit 5b0b7aca66a30692402df9a9909ebbad7acac259
-Author: Cary Coutant <ccoutant@google.com>
-Date:   Mon Mar 2 10:10:52 2015 -0800
+commit 21947aa23cb8a568fc4a7cd2755227230e9fc4e1
+Author: Han Shen <shenhan@google.com>
+Date:   Thu Jul 9 15:55:55 2015 -0700
 
-    Fix an internal error in do_print_to_mapfile on Arm.
+    Use "gold_info" instead of "gold_warning" for erratum fix.
+
+    gold/ChangeLog:
+
+    	* aarch64.cc (Target_aarch64::scan_erratum_843419_span): Use 'gold_info'.
+    	(Target_aarch64::scan_erratum_835769_span): USe 'gold_info'.
+
+    (cherry picked from commit 73854cdd438dc8858290231ebcb682377d71fec2)
+
+build:
+commit 5f349ca282b0d3f41740c8742ff66077ca7b67c4
+Author: Than McIntosh <thanm@google.com>
+Date:   Fri Sep 18 16:48:22 2015 -0400
+
+    Fix selected issues with non-4.9 gcc builds
+
+    Fix some issues that crop up when using build-gcc.sh on post-4.9
+    versions of GCC (for triage/bug-reproduction purposes): trunk gcc
+    calls isl directly, no longer through "cloog", and requires updated
+    version of ISL. Resulting build still fails compiling libatomic,
+    however the cross compiler itself is still usable.
+
+    Change-Id: Ieff549580777a01891ed62b59ff97db610eae42b
+
+cloog:
+commit 604793eab97d360aef729f064674569ee6dbf3e1
+Author: Dan Albert <danalbert@google.com>
+Date:   Wed Jun 17 22:04:32 2015 -0700
+
+    Delete old versions of cloog.
+
+    Change-Id: Ic3dcd5486884b96340ed3c7d029e3204dbfec8d9
+
+expat:
+commit 40172a0ae9d40a068f1e1a48ffcf6a1ccf765ed5
+Author: Jing Yu <jingyu@google.com>
+Date:   Wed Feb 15 16:16:33 2012 -0800
+
+    expat package for building gdb-7.3
+
+    Change-Id: Ia89f7f620935c3af8589fb220016e6bd940f46f1
 
 gdb:
-commit 46a114a3609f0626208607946e58135e48e41c55
-Merge: ec1883d e93ebb3
-Author: Elliott Hughes <enh@google.com>
-Date:   Thu Jul 9 01:34:38 2015 +0000
+commit c9f9f54d36124448cf18d57923ec801ca84478b5
+Author: Josh Gao <jmgao@google.com>
+Date:   Fri Sep 18 15:29:42 2015 -0700
 
-    Merge "Add support for DT_MIPS_RLD_MAP2 tag to gdb 7.9.1"
+    Assume that Python is in the same dir as gdb.
+
+    Needed to share gdb with platform, since gdb will be in
+    prebuilts/gdb/linux-x86, not prebuilts/linux-x86.
+
+    Bug: http://b/21920612
+    Change-Id: I94577cc4895f27316a0a26cb8e47d30a7c7c7b4b
 
 gmp:
 commit b2acd5dbf47868ac5b5bc844e16d2cadcbd4c810
@@ -35,6 +88,32 @@ Date:   Wed Jun 17 22:16:40 2015 -0700
 
     Remove old versions of gmp.
 
+    Change-Id: I1d147eae794b0a19316bd782f5efb7c8a23da863
+
+isl:
+commit 0ccf95726af8ce58ad61ff474addbce3a31ba99c
+Author: Than McIntosh <thanm@google.com>
+Date:   Fri Sep 18 16:47:53 2015 -0400
+
+    Fix selected issues with non-4.9 gcc builds
+
+    Fix some issues that crop up when using build-gcc.sh on post-4.9
+    versions of GCC (for triage/bug-reproduction purposes): trunk gcc
+    calls isl directly, no longer through "cloog", and requires updated
+    version of ISL. Resulting build still fails compiling libatomic,
+    however the cross compiler itself is still usable.
+
+    Change-Id: Ic78cfa8faca9ffc0f095cca0753fd5838c65690f
+
+mpc:
+commit 835d16e92eed875638a8b5d552034c3b1aae045b
+Author: Andrew Hsieh <andrewhsieh@google.com>
+Date:   Tue Dec 25 13:52:02 2012 +0800
+
+    add mpc-1.0.1.tar.gz
+
+    Change-Id: I95012e11d56b20cf9fc2a2e307a3f346195e7d3a
+
 mpfr:
 commit de979fc377db766591e7feaf052f0de59be46e76
 Author: Dan Albert <danalbert@google.com>
@@ -42,16 +121,51 @@ Date:   Wed Jun 17 22:08:27 2015 -0700
 
     Remove old versions of mpfr.
 
-build:
-commit 79b5701f1e2f0dee68958c7c4206cdf9c44f1261
+    Change-Id: If4cb73f8131818e422c69ba477cabf091c7dae7f
+
+ppl:
+commit 979062d362bc5a1c00804237b408b19b4618fb24
+Author: Dan Albert <danalbert@google.com>
+Date:   Thu Jun 18 15:57:49 2015 -0700
+
+    Revert "Remove old version of ppl."
+
+    Depsite not being used, some of the configure scripts still check that
+    it exists... Revert for now and I'll clean up later.
+
+    This reverts commit c4d3042b86063d51e9d4f51fcad1416f765bb5a2.
+
+python:
+commit 5d4afafe362cfabf6c4783a11c4c80df5afa1e1f
+Author: Dan Albert <danalbert@google.com>
+Date:   Fri Aug 28 16:48:41 2015 -0700
+
+    Refactor to use build_support.
+
+    Change-Id: I2ae8a9b093e57e8898a9e6851839a340cc12fae7
+
+sed:
+commit 45df23d6dc8b51ea5cd903d023c10fd7d72415b9
 Author: Elliott Hughes <enh@google.com>
-Date:   Fri Jun 19 23:57:24 2015 +0000
+Date:   Fri Jul 10 13:40:42 2015 -0700
 
-    Revert "Remove references to expat from toolchain/build/configure."
+    Commit sed-4.2.2.
 
-expat:
-commit 40172a0ae9d40a068f1e1a48ffcf6a1ccf765ed5
-Author: Jing Yu <jingyu@google.com>
+    Downloaded from http://ftp.gnu.org/gnu/sed/ and extracted verbatim.
 
-    expat package for building gdb-7.3
+    Needed to build Mac GCCs for mips/mips64 --- the BSD sed doesn't
+    supported extended regex alternate syntax \(a\|b\). It will understand
+    sed -E "(a|b)" with the escapes removed, but that's not what's in the
+    configure file.
 
+    Bug: http://b/22099482
+    Change-Id: Iec036ab35497a957fe462de1d4fdc326e7df5844
+
+yasm:
+commit c78ebe9a44cf69c46fd4e3185fef62e567b5ad4a
+Author: Dan Albert <danalbert@google.com>
+Date:   Fri Aug 28 16:49:04 2015 -0700
+
+    Refactor to use build_support.
+
+    Change-Id: Ie8b02b50a537c12806442dff529f1c7d755a93f0
