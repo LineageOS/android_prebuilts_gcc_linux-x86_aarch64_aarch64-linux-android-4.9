@@ -1,25 +1,19 @@
 Using built-in specs.
 COLLECT_GCC=bin/aarch64-linux-android-gcc
-COLLECT_LTO_WRAPPER=/ssd/aosp_flounder-userdebug-update_gcc/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/../libexec/gcc/aarch64-linux-android/4.9.x-google/lto-wrapper
+COLLECT_LTO_WRAPPER=/ssd/aosp_flounder-userdebug/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/../libexec/gcc/aarch64-linux-android/4.9.x-google/lto-wrapper
 Target: aarch64-linux-android
-Configured with: /usr/local/google/buildbot/repo_clients/https___android.googlesource.com_a_platform_manifest.git/gcc/toolchain/build/../gcc/gcc-4.9/configure --prefix=/buildbot/tmp/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt --target=aarch64-linux-android --host=x86_64-linux-gnu --build=x86_64-linux-gnu --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --with-gmp=/buildbot/tmp/build/toolchain/temp-install --with-mpfr=/buildbot/tmp/build/toolchain/temp-install --with-mpc=/buildbot/tmp/build/toolchain/temp-install --with-cloog=/buildbot/tmp/build/toolchain/temp-install --with-isl=/buildbot/tmp/build/toolchain/temp-install --with-ppl=/buildbot/tmp/build/toolchain/temp-install --disable-ppl-version-check --disable-cloog-version-check --disable-isl-version-check --enable-cloog-backend=isl --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --disable-libitm --enable-initfini-array --disable-nls --prefix=/buildbot/tmp/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt --with-sysroot=/buildbot/tmp/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt/sysroot --with-binutils-version=2.25 --with-mpfr-version=3.1.1 --with-mpc-version=1.0.1 --with-gmp-version=5.0.5 --with-gcc-version=4.9 --with-gdb-version=none --with-gxx-include-dir=/buildbot/tmp/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt/include/c++/4.9 --with-bugurl=http://source.android.com/source/report-bugs.html --enable-languages=c,c++ --disable-bootstrap --enable-plugins --enable-libgomp --enable-gnu-indirect-function --disable-libsanitizer --enable-gold --enable-ld=default --enable-threads --enable-eh-frame-hdr-for-static --enable-fix-cortex-a53-835769 --enable-graphite=yes --with-isl-version=0.11.1 --with-cloog-version=0.18.0 --program-transform-name='s&^&aarch64-linux-android-&' --enable-gold
+Configured with: /tmp/AOSP/toolchain/build/../gcc/gcc-4.9/configure --prefix=/ssd/ndkbuild/tmpdir/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt --target=aarch64-linux-android --host=x86_64-linux-gnu --build=x86_64-linux-gnu --with-gnu-as --with-gnu-ld --enable-languages=c,c++ --with-gmp=/ssd/ndkbuild/build/temp-install --with-mpfr=/ssd/ndkbuild/build/temp-install --with-mpc=/ssd/ndkbuild/build/temp-install --with-cloog=/ssd/ndkbuild/build/temp-install --with-isl=/ssd/ndkbuild/build/temp-install --with-ppl=/ssd/ndkbuild/build/temp-install --disable-ppl-version-check --disable-cloog-version-check --disable-isl-version-check --enable-cloog-backend=isl --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --disable-libitm --enable-initfini-array --disable-nls --prefix=/ssd/ndkbuild/tmpdir/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt --with-sysroot=/ssd/ndkbuild/tmpdir/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt/sysroot --with-binutils-version=2.25 --with-mpfr-version=3.1.1 --with-mpc-version=1.0.1 --with-gmp-version=5.0.5 --with-gcc-version=4.9 --with-gdb-version=none --with-gxx-include-dir=/ssd/ndkbuild/tmpdir/toolchains/linux-x86_64/aarch64-linux-android-4.9/prebuilt/include/c++/4.9 --with-bugurl=http://source.android.com/source/report-bugs.html --enable-languages=c,c++ --disable-bootstrap --enable-plugins --enable-libgomp --enable-gnu-indirect-function --disable-libsanitizer --enable-gold --enable-ld=default --enable-threads --enable-eh-frame-hdr-for-static --enable-fix-cortex-a53-835769 --enable-graphite=yes --with-isl-version=0.11.1 --with-cloog-version=0.18.0 --program-transform-name='s&^&aarch64-linux-android-&' --enable-gold
 Thread model: posix
 gcc version 4.9.x-google 20150123 (prerelease) (GCC)
 
 gcc:
-commit 5aff2e0142aca13849b4e51de503e71d5010efa6
-Author: Than McIntosh <thanm@google.com>
-Date:   Fri Oct 9 12:03:57 2015 -0400
+commit a8c075f72b231c37823661ba0d7d082a21cd39d9
+Author: Dan Albert <danalbert@google.com>
+Date:   Tue Oct 13 16:28:19 2015 -0700
 
-    Fix for b/23822150 (arm64 bad code for copysignl)
+    Remove gcc-4.8.
 
-    This bug was inherited from the google/gcc-4_9 branch; a
-    change was "temporarily" patched out in r216495, then never
-    restored.
-
-    Bug: 23822150
-
-    Change-Id: Ibfc9f65e108e9c9b3dca263920bdae3cc6f75080
+    Change-Id: Iee9c6985c613f58c82e33a91722d371579eb290f
 
 binutils:
 commit 21947aa23cb8a568fc4a7cd2755227230e9fc4e1
@@ -69,17 +63,17 @@ Date:   Wed Feb 15 16:16:33 2012 -0800
     Change-Id: Ia89f7f620935c3af8589fb220016e6bd940f46f1
 
 gdb:
-commit c9f9f54d36124448cf18d57923ec801ca84478b5
+commit ba1cb2b1ec5d1b85f4218fd0d4ac013c72834aa9
 Author: Josh Gao <jmgao@google.com>
-Date:   Fri Sep 18 15:29:42 2015 -0700
+Date:   Tue Oct 13 17:02:07 2015 -0700
 
-    Assume that Python is in the same dir as gdb.
+    Don't use readlink to find gdb's location.
 
-    Needed to share gdb with platform, since gdb will be in
-    prebuilts/gdb/linux-x86, not prebuilts/linux-x86.
+    readlink isn't in POSIX, and the one available in on OS X does not
+    support the -f option. Use $(cd $(dirname $0) && pwd) instead.
 
-    Bug: http://b/21920612
-    Change-Id: I94577cc4895f27316a0a26cb8e47d30a7c7c7b4b
+    Bug: http://b/24776250
+    Change-Id: Ia3b42b4cecd0b39d4dd5af15b2afe9bb1da6893a
 
 gmp:
 commit b2acd5dbf47868ac5b5bc844e16d2cadcbd4c810
