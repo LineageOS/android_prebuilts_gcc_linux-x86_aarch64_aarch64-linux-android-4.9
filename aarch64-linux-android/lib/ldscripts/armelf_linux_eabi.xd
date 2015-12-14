@@ -180,7 +180,6 @@ SECTIONS
   }
   .data1          : { *(.data1) }
   _edata = .; PROVIDE (edata = .);
-  . = .;
   __bss_start = .;
   __bss_start__ = .;
   .bss            :
