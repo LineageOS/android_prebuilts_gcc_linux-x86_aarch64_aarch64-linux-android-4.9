@@ -7,7 +7,7 @@ OUTPUT_FORMAT("elf32-bigaarch64", "elf32-bigaarch64",
 	      "elf32-littleaarch64")
 OUTPUT_ARCH(aarch64:ilp32)
 ENTRY(_start)
-SEARCH_DIR("=/tmp/9fcaa61491b993171172612ee6c48252/aarch64-linux-android/libilp32"); SEARCH_DIR("=/usr/local/libilp32"); SEARCH_DIR("=/libilp32"); SEARCH_DIR("=/usr/libilp32"); SEARCH_DIR("=/tmp/9fcaa61491b993171172612ee6c48252/aarch64-linux-android/lib"); SEARCH_DIR("=/usr/local/lib"); SEARCH_DIR("=/lib"); SEARCH_DIR("=/usr/lib");
+SEARCH_DIR("=/tmp/ec08fa09236e3161f186f0ecaf2224fb/aarch64-linux-android/libilp32"); SEARCH_DIR("=/usr/local/libilp32"); SEARCH_DIR("=/libilp32"); SEARCH_DIR("=/usr/libilp32"); SEARCH_DIR("=/tmp/ec08fa09236e3161f186f0ecaf2224fb/aarch64-linux-android/lib"); SEARCH_DIR("=/usr/local/lib"); SEARCH_DIR("=/lib"); SEARCH_DIR("=/usr/lib");
 SECTIONS
 {
   /* Read-only sections, merged into text segment: */
