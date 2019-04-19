@@ -3,6 +3,7 @@
 from __future__ import print_function
 import os
 import sys
+import time
 
 class CompilerWrapper():
   def __init__(self, argv):
@@ -25,7 +26,7 @@ class CompilerWrapper():
       compiler = os.path.basename(os.path.abspath(__file__))
     self.real_compiler = os.path.join(
         compiler_path,
-        "c2219de2-2586-11e9-8b3d-0bdcf7ee6101")
+        "5f7cda84-6231-11e9-8e70-a31b8a0ae68b")
     self.argv0 = self.real_compiler
 
   def process_gomacc_command(self):
@@ -64,6 +65,7 @@ class CompilerWrapper():
     self.process_gomacc_command()
     self.add_flags()
     self.execargs += [self.real_compiler] + self.args
+    time.sleep(1)
     os.execv(self.argv0, self.execargs)
 
 
