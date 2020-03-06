@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46fb271a_85fc3646",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2020-03-06T01:37:38Z",
+      "side": 1,
+      "message": "gcc: Don\u0027t hardcode path to python",
+      "revId": "f87315703c0509982c62039e6c9fcaa5b029dd25",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87378edf_3e224687",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2020-03-06T01:37:38Z",
+      "side": 1,
+      "message": "In Ubuntu 20.04, there is no longer a symlink to /usr/bin/python,\nwhich causes these wrappers to fail. Calling python in with\n/usr/bin/env works, so switch to that instead.\nFor more details, see: https://lists.ubuntu.com/\narchives/ubuntu-devel/2020-February/040918.html",
+      "revId": "f87315703c0509982c62039e6c9fcaa5b029dd25",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19329ade_97e1bab8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2020-03-06T01:37:38Z",
+      "side": 1,
+      "message": "You can remove the test line and the line after that, unless you plan on uploading it to AOSP.",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 25
+      },
+      "revId": "f87315703c0509982c62039e6c9fcaa5b029dd25",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
