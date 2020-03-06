@@ -56,6 +56,30 @@
       "revId": "f87315703c0509982c62039e6c9fcaa5b029dd25",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7970be07_d07d9866",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2020-03-06T17:02:34Z",
+      "side": 1,
+      "message": "Didn\u0027t AOSP kill gcc?",
+      "parentUuid": "19329ade_97e1bab8",
+      "range": {
+        "startLine": 13,
+        "startChar": 24,
+        "endLine": 13,
+        "endChar": 25
+      },
+      "revId": "f87315703c0509982c62039e6c9fcaa5b029dd25",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
